@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 exports.generateSourceMaps = ({ type }) => ({
     devtool: type,
 });
-
+// https://webpack.js.org/configuration/dev-server/
 exports.devServer = ({ host, port } = {}) => ({
     devServer: {
         historyApiFallback: true,

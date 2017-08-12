@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const parts = require('./webpack.parts.js');
+const parts = require('./webpack/webpack.parts.js');
 const merge = require('webpack-merge');
-const productionConfig = require('./webpack.config.prod.js')
-const developmentConfig = require('./webpack.config.dev.js')
+const productionConfig = require('./webpack/webpack.config.prod.js')
+const developmentConfig = require('./webpack/webpack.config.dev.js')
 
 const PATHS = {
     app: path.join(__dirname, 'app'),
