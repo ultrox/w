@@ -9,4 +9,5 @@ module.exports = merge([
     ),
     parts.extractCSS({use: [parts.modularCss, 'sass-loader']}),
     parts.generateSourceMaps({ type: 'source-map' }),
+    parts.minifyJavaScript(),
 ]);

@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 exports.setFreeVariable = (key, value) => {
     const env = {};
@@ -42,7 +43,12 @@ exports.lintJavaScript = ({ include, exclude, options }) => ({
         ],
     },
 });
-const modularCss = { loader: 'css-loader', options: { modules: true, }, }
+
+const modularCss = {
+    loader: 'css-loader',
+    options: { modules: true },
+};
+
 exports.modularCss = modularCss;
 exports.loadCSS = ({ include, exclude } = {}) => ({
     module: {
@@ -52,7 +58,7 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
                 include,
                 exclude,
 
-                use: ['style-loader', modularCss,],
+                use: ['style-loader', modularCss],
 
             },
         ],
@@ -112,11 +118,31 @@ exports.loadJavaScript = ({ include, exclude }) => ({
                     // something more custom, pass a path to it.
                     // I.e., { cacheDirectory: '<path>' }
                     presets: [ 
-                        [ 'es2015', { modules: false } ] 
+                        [ 'es2015', { modules: false } ],
                     ], 
                     cacheDirectory: true,
                 },
             },
         ],
     },
+});
+
+
+exports.minifyJavaScript = () => ({
+    plugins: [
+        new UglifyJsPlugin({
+            sourceMap: true,
+            compress: true,
+            mangle: true,
+            compressor: {
+                warnings: false,
+                screw_ie8: true,
+                drop_console: true,
+            },
+            output: {
+                comments: false,
+                beautify: false,
+            },
+        }),
+    ],
 });
