@@ -1,6 +1,19 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
+
+exports.PATHS = {
+    app: path.join(__dirname, '../app'),
+    build: path.join(__dirname, '../build'),
+};
+
+exports.clean = (path) => ({
+    plugins: [
+        new CleanWebpackPlugin([path]),
+    ],
+});
 
 exports.setFreeVariable = (key, value) => {
     const env = {};
