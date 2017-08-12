@@ -1,5 +1,9 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+exports.generateSourceMaps = ({ type }) => ({
+    devtool: type,
+});
+
 exports.devServer = ({ host, port } = {}) => ({
     devServer: {
         historyApiFallback: true,
@@ -21,7 +25,6 @@ exports.lintJavaScript = ({ include, exclude, options }) => ({
                 include,
                 exclude,
                 enforce: 'pre',
-
                 loader: 'eslint-loader',
                 options,
             },
